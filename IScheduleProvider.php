@@ -5,7 +5,6 @@ interface IScheduleProvider {
     public function getScheduleByLocation($location);
 
     public function getScheduleByMonth($month);
-
-    public function returnService();
+    
 }
 ?>
