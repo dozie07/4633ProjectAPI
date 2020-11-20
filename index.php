@@ -9,6 +9,6 @@
         //other API calls need to be created:
         
         //include './getScheduleByLocation.php';
-        //include './getScheduleByDate.php';
+        //include './getScheduleByMonth.php';
     ?>
 </html>
