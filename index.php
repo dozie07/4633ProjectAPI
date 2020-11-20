@@ -7,7 +7,7 @@
         include './getScheduleByTeam.php';
 
         //other API calls need to be created:
-        
+
         //include './getScheduleByLocation.php';
         //include './getScheduleByMonth.php';
     ?>

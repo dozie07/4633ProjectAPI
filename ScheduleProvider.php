@@ -20,7 +20,7 @@ class ScheduleProvider implements IScheduleProvider {
         //one iteration written below as an example
 
         //database query code inside loop and store into variables here..
-        $opponentDatabaseResult = "this field will return opponent for match with " . $team1;
+        $team2DatabaseResult = "this field will return opponent for match with " . $team1;
         $locationDatabaseResult = "this field will return location for match with " . $team1;
         $dateDatabaseResult = "this field will return date for match with " . $team1;
         $match = new Match($team1, $team2DatabaseResult, $locationDatabaseResult, $dateDatabaseResult);
