@@ -30,10 +30,20 @@ class ScheduleProvider implements IScheduleProvider {
 
     public function getScheduleByLocation($location) {
         //code here
+        $team1DatabaseResult = "this field will return team1 for match at " . $location;
+        $team2DatabaseResult = "this field will return team2 for match at " . $location;
+        $dateDatabaseResult = "this field will return date for match at " . $location;
+        $match = new Match($team1DatabaseResult, $team2DatabaseResult, $location, $dateDatabaseResult);
+        $this->scheduleService->addMatch($match);
     }
 
     public function getScheduleByMonth($month) {
         //code here
+        $team1DatabaseResult = "this field will return team1 for match during " . $month;
+        $team2DatabaseResult = "this field will return team2 for match during " . $month;
+        $locationDatabaseResult = "this field will return location for match during " . $month;
+        $match = new Match($team1DatabaseResult, $team2DatabaseResult, $locationDatabaseResult, $month);
+        $this->scheduleService->addMatch($match);
     }
 
     public function returnService() {
