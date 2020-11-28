@@ -1,0 +1,55 @@
+# database connection opened
+$serverName = "4633-project-server.database.windows.net\\4633-API"; //serverName\instanceName
+$connectionInfo = array("Database" => "4633-API", "UID" => "clouddev", "PWD" => "password1");
+$conn = sqlsrv_connect($serverName, $connectionInfo);
+if( $conn === false ) {
+  die( print_r( sqlsrv_errors(), true));
+}
+
+
+# database query for Teams v.1 (no loop)
+$sql = "SELECT * FROM schedule WHERE team1=$team1";
+$result = sqlsrv_query($conn, $sql);
+if( $result === false ) {
+  die( print_r( sqlsrv_errors(), true));
+}
+	
+  
+# database query for Team v.2(with loop)
+$sql = "SELECT * FROM schedule WHERE team1=$team1";
+$result = sqlsrv_query($conn, $sql);
+if( $result !== false ) {
+  while( $obj = sqlsrv_fetch_object( $result )) {
+    echo $obj->colName.'<br />';
+  }
+}else{
+die( print_r( sqlsrv_errors(), true));
+}
+
+
+# database query for Location (with loop)
+$sql = "SELECT * FROM schedule WHERE location=$location";
+$result = sqlsrv_query($conn, $sql);
+if( $result !== false ) {
+  while( $obj = sqlsrv_fetch_object( $result )) {
+    echo $obj->colName.'<br />';
+  }
+}else{
+die( print_r( sqlsrv_errors(), true));
+}
+
+
+# database query for Month (with loop)
+$sql = "SELECT * FROM schedule WHERE month=$month";
+$result = sqlsrv_query($conn, $sql);
+if( $result !== false ) {
+  while( $obj = sqlsrv_fetch_object( $result )) {
+    echo $obj->colName.'<br />';
+  }
+}else{
+die( print_r( sqlsrv_errors(), true));
+}
+
+
+# database connection closed
+	sqlsrv_close( $conn );
