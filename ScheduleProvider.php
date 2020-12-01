@@ -20,7 +20,6 @@ class ScheduleProvider implements IScheduleProvider {
         echo (sqlsrv_errors());
     }
     echo "here!!3";
-    $schedule = new Schedule();
     echo "here!!1";
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
         echo "here!!";
