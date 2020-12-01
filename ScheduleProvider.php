@@ -12,7 +12,7 @@ class ScheduleProvider implements IScheduleProvider {
     }
 
     public function getScheduleByTeam($team1) {
-        echo "making it here";
+        echo $team1;
         $tsql = "SELECT * FROM [dbo].[Schedule]
             WHERE HomeTeam = '$team1'
             OR AwayTeam = '$team1'";
