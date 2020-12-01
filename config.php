@@ -1,7 +1,7 @@
 <?php
     $serverName = "4633-project-server.database.windows.net";
     $connectionOptions = array(
-        "Database" => "4633-API",
+        "Database" => "4633-Web-App",
         "Uid" => "clouddev",
         "PWD" => "password1!"
     );
