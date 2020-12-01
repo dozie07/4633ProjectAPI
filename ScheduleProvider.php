@@ -12,7 +12,7 @@ class ScheduleProvider implements IScheduleProvider {
     }
 
     public function getScheduleByTeam($team1) {
-        $tsql = "SELECT * FROM [dbo].[Schedule]";
+        $tsql = "SELECT * FROM [dbo].[Matches]";
         $getResults= sqlsrv_query($conn, $tsql);
         if ($getResults === false) {
             echo (sqlsrv_errors());
