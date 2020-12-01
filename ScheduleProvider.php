@@ -13,13 +13,15 @@ class ScheduleProvider implements IScheduleProvider {
 
     public function getScheduleByTeam($team1) {
         $username = "u";
-    $tsql = "SELECT * FROM [dbo].[Matches]
+        $tsql = "SELECT * FROM [dbo].[Matches]
         WHERE Username = '$username'";
     $getResults= sqlsrv_query($conn, $tsql);
     if ($getResults === false) {
         echo (sqlsrv_errors());
     }
+    echo "here!!3";
     $schedule = new Schedule();
+    echo "here!!1";
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
         echo "here!!";
         $team1 = $row['Team1'];
