@@ -12,23 +12,17 @@ class ScheduleProvider implements IScheduleProvider {
     }
 
     public function getScheduleByTeam($team1) {
-        $tsql = "SELECT * FROM [dbo].[Schedule]
-            WHERE HomeTeam = '$team1'
-            OR AwayTeam = '$team1'";
-        $getResults= sqlsrv_query($conn, $tsql);
-        if ($getResults === false) {
-            echo (sqlsrv_errors());
-        }
-        $schedule = new Schedule();
-        while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
-            $team1 = $row['HomeTeam'];
-            $team2 = $row['AwayTeam'];
-            $location = $row['Location'];
-            $date = $row['MatchDate'];
-            $match = new Match($team1, $team2, $location, $date);
-            $schedule->addMatch($match);
-            $this->scheduleService->addMatch($match);
-        }
+        //database query will go here
+        //a loop is needed to create multiple matches and store them into the schedule's match array
+        //one iteration written below as an example
+
+        //database query code inside loop and store into variables here..
+        $team2DatabaseResult = "this field will return opponent for match with " . $team1;
+        $locationDatabaseResult = "this field will return location for match with " . $team1;
+        $dateDatabaseResult = "this field will return date for match with " . $team1;
+        $match = new Match($team1, $team2DatabaseResult, $locationDatabaseResult, $dateDatabaseResult);
+        $this->scheduleService->addMatch($match);
+        //end loop
     }
 
     public function getScheduleByLocation($location) {

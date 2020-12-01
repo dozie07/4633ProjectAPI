@@ -4,8 +4,8 @@
     include './ScheduleProvider.php';
 
     $provider = new ScheduleProvider();
-    //$team1 = $_POST["team1"];
-    $team1 = "FC Bayern München";
+    $team1 = $_POST["team1"];
+    $team1 = "test1";
     $provider->getScheduleByTeam($team1);
     echo json_encode($provider->returnService()->returnMatches());
 ?>
