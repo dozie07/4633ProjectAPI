@@ -19,14 +19,8 @@ class ScheduleProvider implements IScheduleProvider {
         }
         $schedule = new Schedule();
         while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
-            $team1 = $row['HomeTeam'];
-            $team2 = $row['AwayTeam'];
-            $location = $row['Location'];
-            $date = $row['MatchDate'];
-            $match = new Match($team1, $team2, $location, $date);
-            echo $match;
-            $schedule->addMatch($match);
-            $this->scheduleService->addMatch($match);
+            $team2 = $row['HomeTeam'];
+            echo $team2;
         }
     }
 
