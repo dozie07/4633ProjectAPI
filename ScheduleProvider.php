@@ -12,10 +12,8 @@ class ScheduleProvider implements IScheduleProvider {
     }
 
     public function getScheduleByTeam($team1) {
-        echo $team1;
         $tsql = "SELECT * FROM [dbo].[Schedule]
-            WHERE HomeTeam = '$team1'
-            OR AwayTeam = '$team1'";
+            WHERE HomeTeam = '$team1'";
         $getResults= sqlsrv_query($conn, $tsql);
         if ($getResults === false) {
             echo (sqlsrv_errors());
