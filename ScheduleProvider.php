@@ -21,6 +21,7 @@ class ScheduleProvider implements IScheduleProvider {
     }
     $schedule = new Schedule();
     while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
+        echo "here!!";
         $team1 = $row['Team1'];
         $team2 = $row['Team2'];
         $location = $row['Location'];
