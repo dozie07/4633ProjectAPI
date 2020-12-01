@@ -26,7 +26,6 @@ class ScheduleProvider implements IScheduleProvider {
             $location = $row['Location'];
             $date = $row['MatchDate'];
             $match = new Match($team1, $team2, $location, $date);
-            echo $match;
             $schedule->addMatch($match);
             $this->scheduleService->addMatch($match);
         }
