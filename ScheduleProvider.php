@@ -18,7 +18,7 @@ class ScheduleProvider implements IScheduleProvider {
             echo (sqlsrv_errors());
         }
         while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
-            echo $row['HomeTeam'];
+            echo $row;
         }
     }
 
