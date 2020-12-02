@@ -43,7 +43,7 @@ class ScheduleProvider implements IScheduleProvider {
     public function getScheduleByLocation($location) {
         $tsql = "SELECT * FROM [dbo].[ScheduleCopy]
             WHERE MatchLocation = '$location'
-            ORDER BY MatchLocation";
+            ORDER BY MatchDate";
         $getResults= sqlsrv_query($this->conn, $tsql);
         if ($getResults === false) {
             echo (sqlsrv_errors());
