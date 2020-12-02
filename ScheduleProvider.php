@@ -2,6 +2,7 @@
 include './IScheduleProvider.php';
 include './ScheduleService.php';
 include './Match.php';
+include './config.php';
 
 class ScheduleProvider implements IScheduleProvider {
     public $scheduleService;
@@ -11,7 +12,7 @@ class ScheduleProvider implements IScheduleProvider {
         $this->scheduleService = new ScheduleService();
         $serverName = "4633-project-server.database.windows.net";
         $connectionOptions = array(
-        "Database" => "4633-Web-App",
+        "Database" => "4633-API",
         "Uid" => "clouddev",
         "PWD" => "password1!"
         );
@@ -22,19 +23,22 @@ class ScheduleProvider implements IScheduleProvider {
     }
 
     public function getScheduleByTeam($team1) {
-        $username = "u";
-        $tsql = "SELECT * FROM [dbo].[Matches]
-        WHERE Username = '$username'";
+        $tsql = "SELECT * FROM [dbo].[Schedule]
+            WHERE HomeTeam = '$team1'
+            OR AwayTeam = '$team1'";
         $getResults= sqlsrv_query($this->conn, $tsql);
         if ($getResults === false) {
             echo (sqlsrv_errors());
         }
+        echo "updated";
         while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
-            $team1 = $row['Team1'];
-            $team2 = $row['Team2'];
+            $team1 = $row['HomeTeam'];
+            $team2 = $row['AwayTeam'];
             $location = $row['Location'];
             $date = $row['MatchDate'];
-            echo "$team2";
+            $match = new Match($team1, $team2, $location, $date);
+            $schedule->addMatch($match);
+            $this->scheduleService->addMatch($match);
         }
     }
 
