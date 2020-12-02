@@ -78,7 +78,7 @@ class ScheduleProvider implements IScheduleProvider {
     
     public function getScheduleByLeague($league) {
         $tsql = "SELECT * FROM [dbo].[ScheduleCopy]
-            WHERE MONTH Competition = '$league'
+            WHERE Competition = '$league'
             ORDER BY MatchDate";
         $getResults= sqlsrv_query($this->conn, $tsql);
         if ($getResults === false) {
