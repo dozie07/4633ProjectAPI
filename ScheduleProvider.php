@@ -15,6 +15,7 @@ class ScheduleProvider implements IScheduleProvider {
         "Uid" => "clouddev",
         "PWD" => "password1!"
         );
+        echo "check";
         $this->conn = sqlsrv_connect($serverName, $connectionOptions);
         if( $this->conn === false ) {
             die( print_r( sqlsrv_errors(), true));
