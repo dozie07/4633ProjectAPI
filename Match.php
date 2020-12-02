@@ -4,12 +4,14 @@
         public $team2;
         public $location;
         public $date;
+        public $league;
 
-        public function __construct($team1, $team2, $location, $date) {
+        public function __construct($team1, $team2, $location, $date, $league) {
             $this->team1 = $team1;
             $this->team2 = $team2;
             $this->location = $location;
             $this->date = $date;
+            $this->league = $league;
         }
 
         public function returnTeam1() {
@@ -27,5 +29,8 @@
         public function returnDate() {
             return $this->date;
         }
+        
+        public function returnLeague() {
+            return $this->league;
     }
 ?>
