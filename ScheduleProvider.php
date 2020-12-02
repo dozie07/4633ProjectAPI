@@ -5,7 +5,8 @@ include './Match.php';
 
 class ScheduleProvider implements IScheduleProvider {
     public $scheduleService;
-
+     public $conn;
+    
     public function __construct() {
         $this->scheduleService = new ScheduleService();
     }
