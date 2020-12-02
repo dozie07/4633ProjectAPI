@@ -29,7 +29,8 @@ class ScheduleProvider implements IScheduleProvider {
         if ($getResults === false) {
             echo (sqlsrv_errors());
         }
-        echo "update5";
+        echo "update6";
+        echo "$team1";
         while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
             $team1 = $row['HomeTeam'];
             $team2 = $row['AwayTeam'];
