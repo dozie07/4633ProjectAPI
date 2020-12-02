@@ -22,7 +22,7 @@ class ScheduleProvider implements IScheduleProvider {
     }
 
     public function getScheduleByTeam($team1) {
-        $tsql = "SELECT * FROM [dbo].[Schedule]
+        $tsql = "SELECT * FROM [dbo].[ScheduleCopy]
             WHERE HomeTeam = '$team1'
             OR AwayTeam = '$team1'";
         $getResults= sqlsrv_query($this->conn, $tsql);
@@ -33,7 +33,7 @@ class ScheduleProvider implements IScheduleProvider {
             $team1 = $row['HomeTeam'];
             $team2 = $row['AwayTeam'];
             $location = $row['Location'];
-            $date = $row['MatchDate'];
+            $date = $row['MatchDateString'];
             $match = new Match($team1, $team2, $location, $date);
             $this->scheduleService->addMatch($match);
         }
@@ -49,12 +49,20 @@ class ScheduleProvider implements IScheduleProvider {
     }
 
     public function getScheduleByMonth($month) {
-        //code here
-        $team1DatabaseResult = "this field will return team1 for match during " . $month;
-        $team2DatabaseResult = "this field will return team2 for match during " . $month;
-        $locationDatabaseResult = "this field will return location for match during " . $month;
-        $match = new Match($team1DatabaseResult, $team2DatabaseResult, $locationDatabaseResult, $month);
-        $this->scheduleService->addMatch($match);
+        $tsql = "SELECT * FROM [dbo].[ScheduleCopy]
+            WHERE MONTH(MatchDate) = '$month'";
+        $getResults= sqlsrv_query($this->conn, $tsql);
+        if ($getResults === false) {
+            echo (sqlsrv_errors());
+        }
+        while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
+            $team1 = $row['HomeTeam'];
+            $team2 = $row['AwayTeam'];
+            $location = $row['Location'];
+            $date = $row['MatchDateString'];
+            $match = new Match($team1, $team2, $location, $date);
+            $this->scheduleService->addMatch($match);
+        }
     }
 
     public function returnService() {
