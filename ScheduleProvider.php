@@ -24,7 +24,8 @@ class ScheduleProvider implements IScheduleProvider {
     public function getScheduleByTeam($team1) {
         $tsql = "SELECT * FROM [dbo].[ScheduleCopy]
             WHERE HomeTeam = '$team1'
-            OR AwayTeam = '$team1'";
+            OR AwayTeam = '$team1'
+            ORDER BY HomeTeam";
         $getResults= sqlsrv_query($this->conn, $tsql);
         if ($getResults === false) {
             echo (sqlsrv_errors());
@@ -32,7 +33,7 @@ class ScheduleProvider implements IScheduleProvider {
         while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
             $team1 = $row['HomeTeam'];
             $team2 = $row['AwayTeam'];
-            $location = $row['Location'];
+            $location = $row['MatchLocation'];
             $date = $row['MatchDateString'];
             $match = new Match($team1, $team2, $location, $date);
             $this->scheduleService->addMatch($match);
@@ -40,12 +41,21 @@ class ScheduleProvider implements IScheduleProvider {
     }
 
     public function getScheduleByLocation($location) {
-        //code here
-        $team1DatabaseResult = "this field will return team1 for match at " . $location;
-        $team2DatabaseResult = "this field will return team2 for match at " . $location;
-        $dateDatabaseResult = "this field will return date for match at " . $location;
-        $match = new Match($team1DatabaseResult, $team2DatabaseResult, $location, $dateDatabaseResult);
-        $this->scheduleService->addMatch($match);
+        $tsql = "SELECT * FROM [dbo].[ScheduleCopy]
+            WHERE MatchLocation = '$location'
+            ORDER BY MatchLocation";
+        $getResults= sqlsrv_query($this->conn, $tsql);
+        if ($getResults === false) {
+            echo (sqlsrv_errors());
+        }
+        while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
+            $team1 = $row['HomeTeam'];
+            $team2 = $row['AwayTeam'];
+            $location = $row['MatchLocation'];
+            $date = $row['MatchDateString'];
+            $match = new Match($team1, $team2, $location, $date);
+            $this->scheduleService->addMatch($match);
+        }
     }
 
     public function getScheduleByMonth($month) {
@@ -59,7 +69,7 @@ class ScheduleProvider implements IScheduleProvider {
         while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
             $team1 = $row['HomeTeam'];
             $team2 = $row['AwayTeam'];
-            $location = $row['Location'];
+            $location = $row['MatchLocation'];
             $date = $row['MatchDateString'];
             $match = new Match($team1, $team2, $location, $date);
             $this->scheduleService->addMatch($match);
