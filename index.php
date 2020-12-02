@@ -4,11 +4,8 @@
     </br>
     </br>
     <?php
-        include './getScheduleByTeam.php';
-
-        //other API calls need to be created:
-
+        //include './getScheduleByTeam.php';
         //include './getScheduleByLocation.php';
-        //include './getScheduleByMonth.php';
+        include './getScheduleByMonth.php';
     ?>
 </html>
