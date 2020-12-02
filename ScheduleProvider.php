@@ -22,7 +22,6 @@ class ScheduleProvider implements IScheduleProvider {
     }
 
     public function getScheduleByTeam($team1) {
-        echo "update3";
         $tsql = "SELECT * FROM [dbo].[Schedule]
             WHERE HomeTeam = '$team1'
             OR AwayTeam = '$team1'";
@@ -30,7 +29,16 @@ class ScheduleProvider implements IScheduleProvider {
         if ($getResults === false) {
             echo (sqlsrv_errors());
         }
-        echo "update4";
+        echo "update5";
+        while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
+            $team1 = $row['HomeTeam'];
+            $team2 = $row['AwayTeam'];
+            $location = $row['Location'];
+            $date = $row['MatchDate'];
+            $match = new Match($team1, $team2, $location, $date);
+            $schedule->addMatch($match);
+            $this->scheduleService->addMatch($match);
+        }
     }
 
     public function getScheduleByLocation($location) {
