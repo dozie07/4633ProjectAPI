@@ -12,16 +12,6 @@ class ScheduleProvider implements IScheduleProvider {
     }
 
     public function getScheduleByTeam($team1) {
-        $serverName = "4633-project-server.database.windows.net";
-        $connectionOptions = array(
-        "Database" => "4633-Web-App",
-        "Uid" => "clouddev",
-        "PWD" => "password1!"
-        );
-        $conn = sqlsrv_connect($serverName, $connectionOptions);
-        if( $conn === false ) {
-        die( print_r( sqlsrv_errors(), true));
-        };
         $username = "u";
         $tsql = "SELECT * FROM [dbo].[Matches]
         WHERE Username = '$username'";
