@@ -75,6 +75,24 @@ class ScheduleProvider implements IScheduleProvider {
             $this->scheduleService->addMatch($match);
         }
     }
+    
+    public function getScheduleByLeague($league) {
+        $tsql = "SELECT * FROM [dbo].[ScheduleCopy]
+            WHERE MONTH Competition = '$league'
+            ORDER BY MatchDate";
+        $getResults= sqlsrv_query($this->conn, $tsql);
+        if ($getResults === false) {
+            echo (sqlsrv_errors());
+        }
+        while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
+            $team1 = $row['HomeTeam'];
+            $team2 = $row['AwayTeam'];
+            $location = $row['MatchLocation'];
+            $date = $row['MatchDateString'];
+            $match = new Match($team1, $team2, $location, $date);
+            $this->scheduleService->addMatch($match);
+        }
+    }
 
     public function returnService() {
         return $this->scheduleService;
