@@ -9,6 +9,16 @@ class ScheduleProvider implements IScheduleProvider {
     
     public function __construct() {
         $this->scheduleService = new ScheduleService();
+        $serverName = "4633-project-server.database.windows.net";
+        $connectionOptions = array(
+        "Database" => "4633-API",
+        "Uid" => "clouddev",
+        "PWD" => "password1!"
+        );
+        $this->conn = sqlsrv_connect($serverName, $connectionOptions);
+        if( $this->conn === false ) {
+            die( print_r( sqlsrv_errors(), true));
+        };
     }
 
     public function getScheduleByTeam($team1) {
