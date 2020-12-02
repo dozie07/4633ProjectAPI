@@ -50,7 +50,8 @@ class ScheduleProvider implements IScheduleProvider {
 
     public function getScheduleByMonth($month) {
         $tsql = "SELECT * FROM [dbo].[ScheduleCopy]
-            WHERE MONTH(MatchDate) = '$month'";
+            WHERE MONTH(MatchDate) = '$month'
+            ORDER BY MatchDate";
         $getResults= sqlsrv_query($this->conn, $tsql);
         if ($getResults === false) {
             echo (sqlsrv_errors());
