@@ -8,6 +8,7 @@ class ScheduleProvider implements IScheduleProvider {
     public $conn;
 
     public function __construct() {
+        echo "check";
         $this->scheduleService = new ScheduleService();
         $serverName = "4633-project-server.database.windows.net";
         $connectionOptions = array(
@@ -15,7 +16,6 @@ class ScheduleProvider implements IScheduleProvider {
         "Uid" => "clouddev",
         "PWD" => "password1!"
         );
-        echo "check";
         $this->conn = sqlsrv_connect($serverName, $connectionOptions);
         if( $this->conn === false ) {
             die( print_r( sqlsrv_errors(), true));
