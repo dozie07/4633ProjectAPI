@@ -2,7 +2,6 @@
 include './IScheduleProvider.php';
 include './ScheduleService.php';
 include './Match.php';
-include './config.php';
 
 class ScheduleProvider implements IScheduleProvider {
     public $scheduleService;
