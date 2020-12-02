@@ -32,7 +32,7 @@ class ScheduleProvider implements IScheduleProvider {
         }
         $rows = sqlsrv_has_rows($getResults);
         if ($rows === true) {
-            echo "There are rows. <br />";
+            echo "There are testttttttt. <br />";
         }
         else {
             echo "There are no rows. <br />";
