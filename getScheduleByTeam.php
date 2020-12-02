@@ -4,7 +4,7 @@
     include './ScheduleProvider.php';
 
     $provider = new ScheduleProvider();
-    echo "fucking hello?";
+    echo "fucking hello2?";
     $team1 = $_POST["team1"];
     $team1 = "Eintracht Frankfurt";
     $provider->getScheduleByTeam($team1);
