@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html>
     ****temporary index file for testing****
-   ??????
     </br>
     </br>
     <?php
