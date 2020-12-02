@@ -2,45 +2,25 @@
 include './IScheduleProvider.php';
 include './ScheduleService.php';
 include './Match.php';
+include './config.php';
 
 class ScheduleProvider implements IScheduleProvider {
     public $scheduleService;
-    public $conn;
 
     public function __construct() {
-        echo "check";
         $this->scheduleService = new ScheduleService();
-        $serverName = "4633-project-server.database.windows.net";
-        $connectionOptions = array(
-        "Database" => "4633-API",
-        "Uid" => "clouddev",
-        "PWD" => "password1!"
-        );
-        $this->conn = sqlsrv_connect($serverName, $connectionOptions);
-        if( $this->conn === false ) {
-            die( print_r( sqlsrv_errors(), true));
-        };
     }
 
     public function getScheduleByTeam($team1) {
-        echo "please";
         $tsql = "SELECT * FROM [dbo].[Schedule]
             WHERE HomeTeam = '$team1'
             OR AwayTeam = '$team1'";
-        $getResults= sqlsrv_query($this->conn, $tsql);
+        $getResults= sqlsrv_query($conn, $tsql);
         if ($getResults === false) {
             echo (sqlsrv_errors());
         }
-        echo "????2";
-        $rowtest = sqlsrv_has_rows($getResults);
-        echo "????";
-        if ($rowtest === true) {
-            echo "yes";
-        } else {
-            echo "no";
-        }
+        $schedule = new Schedule();
         while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
-            echo "are you entering this at all"
             $team1 = $row['HomeTeam'];
             $team2 = $row['AwayTeam'];
             $location = $row['Location'];
