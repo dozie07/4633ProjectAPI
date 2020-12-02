@@ -22,7 +22,7 @@ class ScheduleProvider implements IScheduleProvider {
     }
 
     public function getScheduleByTeam($team1) {
-        echo "update2";
+        echo "update3";
         $tsql = "SELECT * FROM [dbo].[Schedule]
             WHERE HomeTeam = '$team1'
             OR AwayTeam = '$team1'";
@@ -30,6 +30,7 @@ class ScheduleProvider implements IScheduleProvider {
         if ($getResults === false) {
             echo (sqlsrv_errors());
         }
+        echo "update4";
     }
 
     public function getScheduleByLocation($location) {
