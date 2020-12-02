@@ -30,12 +30,13 @@ class ScheduleProvider implements IScheduleProvider {
         if ($getResults === false) {
             echo (sqlsrv_errors());
         }
-        $rows = sqlsrv_has_rows($getResults);
-        if ($rows === true) {
-            echo "There are testttttttt. <br />";
-        }
-        else {
-            echo "There are no rows. <br />";
+        $schedule = new Schedule();
+        while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
+            $team1 = $row['Team1'];
+            $team2 = $row['Team2'];
+            $location = $row['Location'];
+            $date = $row['MatchDate'];
+            echo "$team2";
         }
     }
 
