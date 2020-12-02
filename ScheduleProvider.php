@@ -29,15 +29,13 @@ class ScheduleProvider implements IScheduleProvider {
         if ($getResults === false) {
             echo (sqlsrv_errors());
         }
-        echo "update6";
-        echo "$team1";
+        echo "update7";
         while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_BOTH)) {
             $team1 = $row['HomeTeam'];
             $team2 = $row['AwayTeam'];
             $location = $row['Location'];
             $date = $row['MatchDate'];
             $match = new Match($team1, $team2, $location, $date);
-            $schedule->addMatch($match);
             $this->scheduleService->addMatch($match);
         }
     }
